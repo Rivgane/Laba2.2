@@ -4,6 +4,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include <list>
 using namespace std;
 using namespace chrono;
 
@@ -21,6 +22,7 @@ void Task5b();
 void Task6();
 void Task7();
 void Task8();
+void Task9();
 
 //globals
 int arrN;
@@ -58,6 +60,9 @@ returntomainmenu:
 			break;
 		case 8:
 			Task8(); system("pause"); system("cls");
+			break;
+		case 9:
+			Task9(); system("pause"); system("cls");
 			break;
 		case 0:
 			return 0;
@@ -123,6 +128,8 @@ short int main_menu()
 	cout << "2. ќпределение скорости создани€ динамического массива п. 1.\n";
 	cout << "3. ¬ставка, удаление и получение элемента массива.\n";
 	cout << "4. ќпределение скорости вставки, удалени€ и получени€ элемента массива п. 3.\n";
+	cout << "9. »ндивидуальное задание. \n\n";
+	cout << "Ќижеперечисленные задани€ не завершены.\n";
 	cout << "5. ‘ормируетс€ двусв€зный список размерности N; \n";
 	cout << "\t 1) пользователь вводит количество элементов в списке, который будет автоматически заполн€тьс€ случайными числами (0 до 99);\n";
 	cout << "\t 2) пользователь вводит в консоль элементы списка, N определ€етс€ автоматически по количеству введенных элементов;\n";
@@ -135,7 +142,7 @@ short int main_menu()
 	while (1)
 	{
 		cin >> i;
-		if ((i >= 0) & (i <= 8))
+		if ((i >= 0) & (i <= 9))
 			break;
 		else
 			cout << "Ќекорректный ввод, повторите попытку.\n";
@@ -205,7 +212,7 @@ void Task1a()
 
 	for (int i = 0; i < arrN; i++)
 	{
-		arr[i] = rand() % 199 - 99;
+		arr[i] = rand() % 199-99;
 	}
 	cout << endl;
 	system_clock::time_point end_arrfill = system_clock::now();
@@ -381,7 +388,7 @@ deletthis:
 			bool key = false;
 			cout << "¬ведите искомое значение: ";
 			cin >> value;
-			for (int i = 0; i < arrN - 1; i++) { // поиск перебором
+			for (int i = 0; i < arrN; i++) { // поиск перебором
 				if (vect[i] == value) {
 					key = true;
 					del_pos = i;
@@ -462,7 +469,7 @@ fetch:
 			bool key = false;
 			cout << "¬ведите искомое значение: ";
 			cin >> value;
-			for (int i = 0; i < arrN - 1; i++) { // поиск перебором
+			for (int i = 0; i < arrN; i++) { // поиск перебором
 				if (vect[i] == value) {
 					key = true;
 					fetch_pos = i;
@@ -507,6 +514,53 @@ void Task4()
 
 }
 
+
+void Task9() 
+{
+	system("cls");
+	cout << "¬ведите число N эл-тов массива: ";
+	cin >> arrN;
+	cout << endl;
+	vector<int> vect;
+	for (int i = 0; i < arrN; i++)
+	{
+		vect.push_back(rand() % 199 - 99);
+	}
+	cout << endl;
+
+	cout << "ѕолученный массив:";
+	for (int i = 0; i < arrN; i++)
+	{
+		cout << '[' << i << ']' << vect[i] << " ";
+	}
+	cout << endl << endl;
+
+
+	int decreaser;
+	cout << "Ќа какое значение необходимо уменьшить каждый четный элемент?	";
+	cin >> decreaser;
+	int randomized = 1 + rand() % 5;
+	cout << "—лучайный делитель дл€ нечетных чисел: " << randomized << endl;
+	//тут должен быть секундомер
+	for (int i = 0; i < arrN; i++)
+	{
+		if (i % 2 == 0)
+			vect[i] = vect[i] - decreaser;
+		else
+			vect[i] = vect[i] / randomized;
+	}
+	//тут должен быть секундомер
+	cout << endl << endl;
+	cout << "ѕолученный массив:";
+	for (int i = 0; i < arrN; i++)
+	{
+		cout << '[' << i << ']' << vect[i] << " ";
+	}
+	cout << endl << endl;
+
+//где-то тут должна быть работа со списком и секундомер.
+//тут должно быть сравнение скорости работы со списком и с динамическим массивом.
+}
 
 
 void Task5a()
